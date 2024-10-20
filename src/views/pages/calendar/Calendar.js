@@ -38,7 +38,8 @@ const Calendar = props => {
     setCalendarApi,
     handleSelectEvent,
     handleLeftSidebarToggle,
-    handleAddEventSidebarToggle
+    handleAddEventSidebarToggle,
+    role
   } = props
 
   // ** Refs

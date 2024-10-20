@@ -9,7 +9,7 @@ import OptionsMenu from 'src/@core/components/option-menu'
 import { styled } from '@mui/material/styles'
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress'
 import { Icon } from '@iconify/react'
-import { AvatarGroup, IconButton, Tooltip, Link as MUILink } from '@mui/material'
+import { AvatarGroup, IconButton, Tooltip, Link as MUILink, CardMedia, CardActions, Button } from '@mui/material'
 import { useState } from 'react'
 import Image from 'next/image'
 import themeMois from '../../../../public/assets/theme_mois.svg'
@@ -23,12 +23,14 @@ const avatarGroup = [
   { avatar: '/images/avatars/4.png', name: 'George Burrill' }
 ]
 
-const Ateliers = () => {
+const Ateliers = ({ role, setOpen }) => {
   const router = useRouter()
 
   const handleJoinLive = id => {
     router.push(`/stage-ateiliers/fiche-stage/${id}`) // Update this path according to your routing structure
   }
+
+  const handleClickOpen = () => setOpen(true)
 
   return (
     <Card>
@@ -41,16 +43,10 @@ const Ateliers = () => {
           />
         }
       />
-      <Box className='w-full '>
-        <Image
-          quality={100}
-          width={100}
-          height={100}
-          src={themeMois}
-          alt='Theme de mois'
-          className='w-full h-full rounded-t-[10px] max-h-[15rem] object-cover'
-        />
-      </Box>
+      <CardMedia
+        sx={{ height: 250, borderTopLeftRadius: '15px', borderTopRightRadius: '15px' }}
+        image='/assets/theme_mois.svg'
+      />
       <CardContent>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
           <Typography className='!text-[#4C4E64] !text-[20px] opacity-[0.85] !font-medium'>
@@ -121,6 +117,13 @@ const Ateliers = () => {
           </Box>
         </Box>
       </CardContent>
+      {role == 'admin' && (
+        <CardActions>
+          <Button variant='contained' className='!bg-secondColor hover:!bg-secondColor' onClick={handleClickOpen}>
+            créer un stage
+          </Button>
+        </CardActions>
+      )}
     </Card>
   )
 }

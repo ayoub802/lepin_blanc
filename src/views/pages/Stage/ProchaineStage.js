@@ -9,6 +9,7 @@ import Image from 'next/image'
 import themeMois from '../../../../public/assets/theme_mois.svg'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { CardMedia } from '@mui/material'
 
 const ProchaineStage = () => {
   const router = useRouter()
@@ -28,16 +29,10 @@ const ProchaineStage = () => {
           />
         }
       />
-      <Box className='w-full '>
-        <Image
-          quality={100}
-          width={100}
-          height={100}
-          src={themeMois}
-          alt='Theme de mois'
-          className='w-full h-full rounded-t-[10px] max-h-[15rem] object-cover'
-        />
-      </Box>
+      <CardMedia
+        sx={{ height: 250, borderTopLeftRadius: '15px', borderTopRightRadius: '15px' }}
+        image='/assets/theme_mois.svg'
+      />
       <CardContent>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
           <Typography className='!text-[#4C4E64] !text-[20px] opacity-[0.85] !font-medium'>Stage de musique</Typography>

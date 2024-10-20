@@ -13,9 +13,11 @@ import { useState } from 'react'
 import {
   Alert,
   AlertTitle,
+  Avatar,
   Button,
   Card,
   CardContent,
+  Divider,
   FormControl,
   FormControlLabel,
   FormHelperText,
@@ -29,6 +31,9 @@ import {
 import { PiTextAaFill } from 'react-icons/pi'
 import { Box, styled } from '@mui/system'
 import { Controller, useForm } from 'react-hook-form'
+import { useAuth } from 'src/hooks/useAuth'
+import Moderation from 'src/views/pages/Contenu/Moderation'
+import FicheModeraiton from 'src/views/pages/Contenu/FicheModeraiton'
 
 const ButtonStyled = styled(Button)(({ theme }) => ({
   [theme.breakpoints.down('sm')]: {
@@ -50,6 +55,10 @@ const ResetButtonStyled = styled(Button)(({ theme }) => ({
 
 const Contenu = () => {
   const [value, setValue] = useState('1')
+
+  const [selectedRequest, setSelectedRequest] = useState(false) // State to handle selected request
+
+  const { user } = useAuth()
 
   const handleChange = (event, newValue) => {
     setValue(newValue)
@@ -94,6 +103,24 @@ const Contenu = () => {
                   className='!min-h-[55px]'
                   icon={<PiTextAaFill size={25} className='!mb-0' />}
                 />
+                {user.role == 'admin' && (
+                  <Tab
+                    value='2'
+                    sx={{
+                      flexDirection: 'row',
+                      gap: 2,
+                      alignItems: 'center',
+                      py: 0,
+                      '&.Mui-selected': {
+                        color: '#F2660D',
+                        borderColor: '#F2660D'
+                      }
+                    }}
+                    label='moderation'
+                    className='!min-h-[55px]'
+                    icon={<Icon icon='ic:baseline-warning-amber' className='!mb-0' />}
+                  />
+                )}
               </TabList>
               <TabPanel value='1'>
                 <Box sx={{ mt: 7 }}>
@@ -505,6 +532,13 @@ const Contenu = () => {
                     </Grid>
                   </Box>
                 </Box>
+              </TabPanel>
+              <TabPanel value='2'>
+                {selectedRequest ? (
+                  <FicheModeraiton setSelectedRequest={setSelectedRequest} />
+                ) : (
+                  <Moderation setSelectedRequest={setSelectedRequest} />
+                )}
               </TabPanel>
             </TabContext>
           </CardContent>

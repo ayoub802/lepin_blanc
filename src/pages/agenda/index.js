@@ -27,6 +27,8 @@ import {
   handleAllCalendars,
   handleCalendarsUpdate
 } from 'src/store/apps/calendar'
+import { useAuth } from 'src/hooks/useAuth'
+import { useRouter } from 'next/router'
 
 // ** CalendarColors
 const calendarsColor = {
@@ -46,6 +48,8 @@ const AppCalendar = () => {
   const dispatch = useDispatch()
   const store = useSelector(state => state.calendar)
   console.log('The Store => ', store)
+  const { user } = useAuth()
+  const router = useRouter()
 
   // ** Vars
   const leftSidebarWidth = 260
@@ -56,7 +60,13 @@ const AppCalendar = () => {
     dispatch(fetchEvents(store.selectedCalendars))
   }, [dispatch, store.selectedCalendars])
   const handleLeftSidebarToggle = () => setLeftSidebarOpen(!leftSidebarOpen)
-  const handleAddEventSidebarToggle = () => setAddEventSidebarOpen(!addEventSidebarOpen)
+  const handleAddEventSidebarToggle = () => {
+    if (user?.role == 'admin') {
+      router.push(`/agenda/add/1`)
+    } else {
+      setAddEventSidebarOpen(!addEventSidebarOpen)
+    }
+  }
 
   return (
     <CalendarWrapper
@@ -79,6 +89,7 @@ const AppCalendar = () => {
         isView={false}
         handleLeftSidebarToggle={handleLeftSidebarToggle}
         handleAddEventSidebarToggle={handleAddEventSidebarToggle}
+        role={user?.role}
       />
       <Box
         sx={{

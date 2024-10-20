@@ -60,7 +60,7 @@ const data = [
 
 const Evenement = () => {
   return (
-    <Card>
+    <Card className='2xl:min-h-[156rem] 2xl:max-h-[160rem] '>
       <CardHeader
         title='Mes évènements'
         action={

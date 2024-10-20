@@ -19,6 +19,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications'
 import { Search } from '@mui/icons-material'
 import SwipeableDrawer from '@mui/material/SwipeableDrawer'
 import { useRouter } from 'next/router'
+import UserDropdown from 'src/@core/layouts/components/shared-components/UserDropdown'
 
 const pages = [
   { label: 'Fil d’actualité', path: '/fil-actualite' },
@@ -144,32 +145,7 @@ function HeaderNav() {
                 <NotificationsIcon />
               </Badge>
             </IconButton>
-            <Tooltip title='Open settings'>
-              <IconButton sx={{ p: 0 }}>
-                <Avatar alt='Remy Sharp' src='/static/images/avatar/2.jpg' />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id='menu-appbar'
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right'
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right'
-              }}
-              open={Boolean(anchorElUser)}
-            >
-              {settings.map(setting => (
-                <MenuItem key={setting}>
-                  <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
+            <UserDropdown settings={settings} />
           </Box>
         </Toolbar>
       </Container>

@@ -13,6 +13,8 @@ import { Icon } from '@iconify/react'
 
 // ** React Imports
 import DialogAddCard from './DialogCard'
+import { Box } from '@mui/system'
+import { useAuth } from 'src/hooks/useAuth'
 
 const AterlierCard = () => {
   const [value, setValue] = useState('checked')
@@ -21,6 +23,8 @@ const AterlierCard = () => {
   const handleChange = event => {
     setValue(event.target.value)
   }
+
+  const { user } = useAuth()
 
   return (
     <Card>
@@ -85,14 +89,41 @@ const AterlierCard = () => {
         <Typography className='!text-secondColor !mt-3 text-center !text-[24px] !font-medium'>45 €</Typography>
       </CardContent>
       <CardActions className='card-action-dense mx-auto max-w-max mb-5'>
-        <Button
-          variant='contained'
-          onClick={() => setShow(true)}
-          sx={{ backgroundColor: '#F2660D' }}
-          className='!py-3 !px-8 hover:!bg-secondColor'
-        >
-          PARTICIPER
-        </Button>
+        {user?.role == 'admin' ? (
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 4
+            }}
+          >
+            <Button
+              variant='contained'
+              onClick={() => setShow(true)}
+              sx={{ backgroundColor: '#F2660D' }}
+              className='!py-3 !px-8 hover:!bg-secondColor'
+            >
+              partager L’aTELIER
+            </Button>
+            <Button
+              variant='contained'
+              onClick={() => setShow(true)}
+              sx={{ backgroundColor: '#F2660D' }}
+              className='!py-3 !px-8 hover:!bg-secondColor'
+            >
+              ACCEDER A L’aTELIER
+            </Button>
+          </Box>
+        ) : (
+          <Button
+            variant='contained'
+            onClick={() => setShow(true)}
+            sx={{ backgroundColor: '#F2660D' }}
+            className='!py-3 !px-8 hover:!bg-secondColor'
+          >
+            PARTICIPER
+          </Button>
+        )}
       </CardActions>
 
       <DialogAddCard show={show} setShow={setShow} />

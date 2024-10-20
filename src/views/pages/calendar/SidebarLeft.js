@@ -17,7 +17,8 @@ const SidebarLeft = props => {
     handleAllCalendars,
     handleCalendarsUpdate,
     handleLeftSidebarToggle,
-    handleAddEventSidebarToggle
+    handleAddEventSidebarToggle,
+    role
   } = props
   const colorsArr = calendarsColor ? Object.entries(calendarsColor) : []
 
@@ -83,7 +84,7 @@ const SidebarLeft = props => {
           onClick={handleSidebarToggleSidebar}
           className='!bg-secondColor hover:!bg-secondColor'
         >
-          Plannifier
+          {role == 'admin' ? 'ajouter' : 'Plannifier'}
         </Button>
 
         <Typography variant='body2' sx={{ mt: 7, mb: 2.5, textTransform: 'uppercase' }}>
