@@ -60,6 +60,7 @@ const AppCalendar = () => {
     dispatch(fetchEvents(store.selectedCalendars))
   }, [dispatch, store.selectedCalendars])
   const handleLeftSidebarToggle = () => setLeftSidebarOpen(!leftSidebarOpen)
+
   const handleAddEventSidebarToggle = () => {
     if (user?.role == 'admin') {
       router.push(`/agenda/add/1`)

@@ -10,7 +10,7 @@ import DatePicker from 'react-datepicker'
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
 import { useRouter } from 'next/router'
 
-const index = () => {
+const AddAgenda = () => {
   const [date, setDate] = useState(new Date())
 
   const theme = useTheme()
@@ -614,4 +614,4 @@ const index = () => {
   )
 }
 
-export default index
+export default AddAgenda
